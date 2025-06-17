@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Lesson } from '../types';
 import CodeEditor from './CodeEditor';
+import { useProgress } from '../context/ProgressContext';
 
 interface LessonViewerProps {
   lesson: Lesson;
@@ -8,6 +9,7 @@ interface LessonViewerProps {
 
 const LessonViewer: React.FC<LessonViewerProps> = ({ lesson }) => {
   const [output, setOutput] = useState<string>('');
+  const { markLessonComplete, isLessonComplete } = useProgress();
 
   const handleRunCode = (code: string) => {
     try {
@@ -40,9 +42,25 @@ const LessonViewer: React.FC<LessonViewerProps> = ({ lesson }) => {
   return (
     <div className="container mx-auto p-4">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">{lesson.title}</h1>
+        <div className="flex items-center mb-2">
+          <h1 className="text-3xl font-bold mr-2">{lesson.title}</h1>
+          {isLessonComplete(lesson.id) && (
+            <span className="text-green-500 text-2xl" title="Completed">✔</span>
+          )}
+        </div>
         <p className="text-gray-700 mb-6">{lesson.description}</p>
-        
+        <div className="mb-4">
+          {!isLessonComplete(lesson.id) ? (
+            <button
+              onClick={() => markLessonComplete(lesson.id)}
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+            >
+              Mark as Complete
+            </button>
+          ) : (
+            <span className="px-4 py-2 bg-green-100 text-green-700 rounded">Lesson Completed</span>
+          )}
+        </div>
         <div className="bg-gray-50 p-4 rounded-lg mb-6">
           <h2 className="text-xl font-semibold mb-2">Example</h2>
           <pre className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">
