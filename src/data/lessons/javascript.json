@@ -1,0 +1,17 @@
+{
+  "id": "js-basics",
+  "name": "JavaScript Basics",
+  "description": "Learn the fundamentals of JavaScript programming",
+  "language": "javascript",
+  "lessons": [
+    {
+      "id": "js-1",
+      "title": "Variables and Data Types",
+      "description": "Learn about variables and different data types in JavaScript",
+      "example": "let name = 'John';\nconst age = 25;\nlet isStudent = true;\n\nconsole.log(name);\nconsole.log(age);\nconsole.log(isStudent);",
+      "challenge": "Create three variables:\n1. A string variable called 'favoriteColor'\n2. A number variable called 'luckyNumber'\n3. A boolean variable called 'isLearning'\nThen print them to the console.",
+      "language": "javascript",
+      "order": 1
+    }
+  ]
+} 
